@@ -96,7 +96,7 @@ export default function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [compilePeriod, setCompilePeriod] = useState<'7d' | 'month'>('7d');
   const [activeGoogleCampaign, setActiveGoogleCampaign] = useState(0);
-  const totalSlides = 17;
+  const totalSlides = 8;
 
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % totalSlides);
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
@@ -133,503 +133,7 @@ export default function App() {
       {/* Main Content Area */}
       <main className="flex-1 relative overflow-hidden flex items-center justify-center">
         <SlideWrapper slideKey={currentSlide}>
-          {currentSlide === 0 && (
-            <div className="text-center space-y-6 max-w-5xl">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8 }}
-                className="inline-block"
-              >
-                <h2 className="text-brand-cyan text-sm sm:text-base font-bold tracking-[0.6em] uppercase mb-4 text-center">Apresentação de Performance</h2>
-                <h1 className="text-4xl sm:text-6xl md:text-8xl font-black italic tracking-tighter leading-[0.9] mb-4 uppercase text-center">
-                  RESULTADOS <br />
-                  <span className="text-brand-cyan cyan-glow">CONFIAUTO</span>
-                </h1>
-                <div className="h-1.5 w-24 bg-brand-cyan mx-auto mt-6" />
-              </motion.div>
-              
-              <div className="pt-8 text-white/40 font-mono tracking-[0.3em] text-[10px] uppercase">
-                Análise de Semanas de Teste • {PERFORMANCE_DATA.period}
-              </div>
-            </div>
-          )}
-
-          {currentSlide === 1 && (
-            <div className="w-full max-w-5xl px-4 flex flex-col justify-center items-center">
-              <div className="flex flex-col items-center gap-2 text-center mb-6">
-                <h2 className="text-2xl md:text-4xl font-black italic uppercase tracking-tighter mx-auto leading-none">Investimento Total por Período</h2>
-                <div className="h-0.5 w-12 bg-white/10 my-1" />
-                <p className="text-white/30 uppercase tracking-[0.2em] font-bold text-[8px] italic">Aperfeiçoamento Constante</p>
-              </div>
-
-              <div className="w-full space-y-4">
-                {/* Destaque do Total */}
-                <div className="glass-card p-5 md:p-6 rounded-[2rem] border-brand-cyan/20 bg-brand-cyan/5 text-center relative overflow-hidden shadow-[0_0_50px_-20px_rgba(0,242,255,0.2)]">
-                  <p className="text-brand-cyan text-[8px] font-bold uppercase tracking-[0.3em] mb-1">Total Geral Investido</p>
-                  <p className="text-2xl md:text-4xl font-black italic text-brand-cyan cyan-glow leading-none tracking-tighter uppercase">
-                    R$ {(PERFORMANCE_DATA.weeklyInvestmentTotal || PERFORMANCE_DATA.weeklyInvestment.reduce((acc, curr) => acc + curr.amount, 0)).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 w-full">
-                  {PERFORMANCE_DATA.weeklyInvestment.map((item, index) => (
-                    <div key={index} className={cn(
-                      "glass-card p-3 md:p-4 rounded-[1.5rem] border-white/5 hover:border-brand-cyan/20 transition-all group text-center space-y-2 flex flex-col justify-center",
-                      index === PERFORMANCE_DATA.weeklyInvestment.length - 1 && "border-brand-cyan/25 bg-brand-cyan/5 shadow-[0_0_30px_-10px_rgba(0,242,255,0.15)]"
-                    )}>
-                      <p className="text-white/30 text-[8px] font-bold uppercase tracking-widest leading-none">{item.period}</p>
-                      <div className="space-y-1">
-                        <p className={cn(
-                          "text-lg md:text-xl font-black italic transition-colors leading-none tracking-tighter uppercase",
-                          index === PERFORMANCE_DATA.weeklyInvestment.length - 1 ? "text-brand-cyan" : "text-white"
-                        )}>
-                          R$ {item.amount.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-                        </p>
-                        {index > 0 && (
-                          <p className={cn(
-                            "text-[7px] font-bold uppercase tracking-wider leading-none",
-                            item.amount >= PERFORMANCE_DATA.weeklyInvestment[index - 1].amount ? "text-emerald-400/60" : "text-amber-400/60"
-                          )}>
-                            {item.amount >= PERFORMANCE_DATA.weeklyInvestment[index - 1].amount ? "+" : ""}
-                            {(((item.amount / PERFORMANCE_DATA.weeklyInvestment[index - 1].amount) - 1) * 100).toFixed(1)}% vs anterior
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-
-          {currentSlide === 2 && (
-            <div className="w-full max-w-5xl px-4 flex flex-col justify-center items-center">
-              <div className="flex flex-col items-center gap-1 text-center mb-3">
-                <span className="text-brand-cyan font-black italic text-lg uppercase tracking-[0.2em] leading-none">CRM</span>
-                <h2 className="text-xl md:text-3xl font-black italic uppercase tracking-tighter mx-auto leading-none mt-1">Métricas: {PERFORMANCE_DATA.crmLpTest.name}</h2>
-                <div className="h-0.5 w-12 bg-white/10 my-1" />
-                <p className="text-white/30 uppercase tracking-[0.2em] font-bold text-[8px] italic">Fase de Teste • Semana Anterior vs Atual</p>
-              </div>
-
-              <div className="w-full space-y-3">
-                {/* Destaque do Acumulado (Soma do Teste) */}
-                <div className="glass-card p-3 md:p-4 rounded-[1.5rem] border-brand-cyan/20 bg-brand-cyan/5 text-center relative overflow-hidden shadow-[0_0_35px_-20px_rgba(0,242,255,0.15)]">
-                  <p className="text-brand-cyan text-[8px] font-bold uppercase tracking-[0.3em] mb-1">Resultado Geral Acumulado no Teste</p>
-                  <div className="flex flex-col md:flex-row justify-around items-center gap-3 mt-1.5">
-                    <div>
-                      <p className="text-white/30 text-[8px] font-bold uppercase tracking-widest">Total Investido</p>
-                      <p className="text-lg md:text-xl font-black italic text-white uppercase tracking-tighter">
-                        R$ {PERFORMANCE_DATA.crmLpTest.combined.totalInvestment.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-                      </p>
-                    </div>
-                    <div className="hidden md:block h-6 w-[1px] bg-white/10" />
-                    <div>
-                      <p className="text-brand-cyan text-[8px] font-bold uppercase tracking-widest">Total de Leads</p>
-                      <p className="text-lg md:text-2xl font-black italic text-brand-cyan cyan-glow uppercase tracking-tighter">
-                        {PERFORMANCE_DATA.crmLpTest.combined.totalLeads} Leads
-                      </p>
-                    </div>
-                    <div className="hidden md:block h-6 w-[1px] bg-white/10" />
-                    <div>
-                      <p className="text-white/30 text-[8px] font-bold uppercase tracking-widest">CPL Geral do Teste</p>
-                      <p className="text-lg md:text-xl font-black italic text-emerald-400 uppercase tracking-tighter">
-                        R$ {PERFORMANCE_DATA.crmLpTest.combined.avgCpl.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Grid Comparativo de Performance semanas */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full items-stretch">
-                  {/* Semana Anterior */}
-                  <div className="glass-card p-3 md:p-4 rounded-[1.5rem] border-white/5 space-y-2 relative overflow-hidden group flex flex-col justify-center">
-                    <div className="absolute top-0 right-0 p-1.5 bg-white/5 rounded-bl-[1rem] font-black text-[6px] uppercase italic text-white/40 tracking-widest">Baseline</div>
-                    <h3 className="text-xs font-black italic uppercase tracking-tight text-white/40">Fase 1: Semana Anterior</h3>
-                    
-                    <div className="space-y-2">
-                      <div className="grid grid-cols-[1fr_auto] items-center border-b border-white/5 pb-1 gap-2">
-                        <p className="text-[8px] font-bold uppercase text-white/20 tracking-widest">Investimento</p>
-                        <p className="text-sm md:text-base font-black italic text-white whitespace-nowrap">R$ {PERFORMANCE_DATA.crmLpTest.previousWeek.totalInvestment.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
-                      </div>
-                      <div className="grid grid-cols-[1fr_auto] items-center border-b border-white/5 pb-1 gap-2">
-                        <p className="text-[8px] font-bold uppercase text-white/20 tracking-widest">Leads Gerados</p>
-                        <p className="text-lg font-black italic text-white/70">{PERFORMANCE_DATA.crmLpTest.previousWeek.totalLeads}</p>
-                      </div>
-                      <div className="grid grid-cols-[1fr_auto] items-center gap-2">
-                        <p className="text-[8px] font-bold uppercase text-white/20 tracking-widest">CPL Médio</p>
-                        <p className="text-sm md:text-base font-black italic text-white">R$ {PERFORMANCE_DATA.crmLpTest.previousWeek.avgCpl.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Semana Atual (Screenshot) */}
-                  <div className="glass-card p-3 md:p-4 rounded-[1.5rem] border-brand-cyan/20 bg-brand-cyan/5 space-y-2 relative overflow-hidden flex flex-col justify-center shadow-[0_0_30px_-15px_rgba(0,242,255,0.15)]">
-                    <div className="absolute top-0 right-0 p-1.5 bg-brand-cyan text-brand-black font-black text-[6px] uppercase italic rounded-bl-[1rem] shadow-md tracking-widest">Fase atual</div>
-                    <h3 className="text-xs font-black italic uppercase tracking-tight text-brand-cyan">Fase 2: Semana Atual (Últimos 07 Dias)</h3>
-                    
-                    <div className="space-y-2">
-                      <div className="grid grid-cols-[1fr_auto] items-center border-b border-brand-cyan/10 pb-1 gap-2">
-                        <p className="text-[8px] font-bold uppercase text-brand-cyan/60 tracking-widest">Investimento</p>
-                        <p className="text-sm md:text-base font-black italic text-white whitespace-nowrap">R$ {PERFORMANCE_DATA.crmLpTest.currentWeek.totalInvestment.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
-                      </div>
-                      <div className="grid grid-cols-[1fr_auto] items-center border-b border-brand-cyan/10 pb-1 gap-2">
-                        <p className="text-[8px] font-bold uppercase text-brand-cyan/60 tracking-widest">Leads Gerados</p>
-                        <div className="text-right">
-                          <p className="text-lg font-black italic text-brand-cyan cyan-glow leading-none">{PERFORMANCE_DATA.crmLpTest.currentWeek.totalLeads}</p>
-                          <p className="text-[6px] font-bold uppercase text-amber-400 mt-0.5 whitespace-nowrap">
-                            -{(((1 - PERFORMANCE_DATA.crmLpTest.currentWeek.totalLeads / PERFORMANCE_DATA.crmLpTest.previousWeek.totalLeads)) * 100).toFixed(1)}% volume vs anterior
-                          </p>
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-[1fr_auto] items-center gap-2">
-                        <p className="text-[8px] font-bold uppercase text-brand-cyan/60 tracking-widest">CPL Médio</p>
-                        <div className="text-right">
-                          <p className="text-sm md:text-base font-black italic text-emerald-400 leading-none whitespace-nowrap">R$ {PERFORMANCE_DATA.crmLpTest.currentWeek.avgCpl.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
-                          <p className="text-[6px] font-bold uppercase text-amber-400 mt-0.5">
-                            +{(((PERFORMANCE_DATA.crmLpTest.currentWeek.avgCpl / PERFORMANCE_DATA.crmLpTest.previousWeek.avgCpl) - 1) * 100).toFixed(1)}% alteração
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {currentSlide === 3 && (
-            <div className="w-full max-w-5xl px-4 flex flex-col justify-center items-center gap-3">
-              <div className="flex flex-col items-center gap-1 text-center mb-1">
-                <span className="text-brand-cyan font-black italic text-lg uppercase tracking-widest leading-none">Comparativo</span>
-                <h2 className="text-xl md:text-3xl font-black italic uppercase tracking-tighter mx-auto leading-tight">Campanha Novos Estáticos</h2>
-                <div className="h-0.5 w-12 bg-white/10 my-1" />
-                <p className="text-white/30 uppercase tracking-[0.2em] font-bold text-[8px] italic">Evolução de Performance Semanal e Visão Mensal</p>
-              </div>
-
-              {/* Destaque do Acumulado (Visão Mensal) */}
-              <div className="glass-card p-3 md:p-4 rounded-[1.5rem] border-brand-cyan/20 bg-brand-cyan/5 text-center relative overflow-hidden shadow-[0_0_35px_-20px_rgba(0,242,255,0.15)] w-full">
-                <p className="text-brand-cyan text-[8px] font-bold uppercase tracking-[0.3em] mb-1">Resultado Geral Acumulado • Visão Mensal</p>
-                <div className="flex flex-col md:flex-row justify-around items-center gap-3 mt-1.5">
-                  <div>
-                    <p className="text-white/30 text-[8px] font-bold uppercase tracking-widest">Total Investido</p>
-                    <p className="text-sm md:text-base font-black italic text-white uppercase tracking-tighter">
-                      R$ {PERFORMANCE_DATA.comparisonEstaticos.combined.totalInvestment.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-                    </p>
-                  </div>
-                  <div className="hidden md:block h-6 w-[1px] bg-white/10" />
-                  <div>
-                    <p className="text-brand-cyan text-[8px] font-bold uppercase tracking-widest">Total de Leads</p>
-                    <p className="text-lg font-black italic text-brand-cyan cyan-glow uppercase tracking-tighter leading-none">
-                      {PERFORMANCE_DATA.comparisonEstaticos.combined.totalLeads} Leads
-                    </p>
-                  </div>
-                  <div className="hidden md:block h-6 w-[1px] bg-white/10" />
-                  <div>
-                    <p className="text-white/30 text-[8px] font-bold uppercase tracking-widest">CPL Médio Geral</p>
-                    <p className="text-sm md:text-base font-black italic text-emerald-400 uppercase tracking-tighter">
-                      R$ {PERFORMANCE_DATA.comparisonEstaticos.combined.avgCpl.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 w-full items-stretch">
-                {/* Semana 1: Inicial */}
-                <div className="glass-card p-3 md:p-4 rounded-[1.5rem] border-white/5 space-y-3 relative overflow-hidden group flex flex-col justify-center bg-white/[0.01]">
-                  <div className="absolute top-0 right-0 p-1.5 bg-white/5 rounded-bl-[1rem] font-black text-[6px] uppercase italic text-white/40 tracking-widest">W1: Inicial</div>
-                  <h3 className="text-xs font-black italic uppercase tracking-tight text-white/40">Fase 1: Sem. Inicial (05-11/05)</h3>
-                  
-                  <div className="space-y-2">
-                    <div className="grid grid-cols-[1fr_auto] items-center border-b border-white/5 pb-1.5 gap-2">
-                      <p className="text-[8px] font-bold uppercase text-white/20 tracking-widest">Investimento</p>
-                      <p className="text-xs md:text-sm font-black italic whitespace-nowrap">R$ {PERFORMANCE_DATA.comparisonEstaticos.week1.totalInvestment.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
-                    </div>
-                    <div className="grid grid-cols-[1fr_auto] items-center border-b border-white/5 pb-1.5 gap-2">
-                      <p className="text-[8px] font-bold uppercase text-white/20 tracking-widest">Leads</p>
-                      <p className="text-sm font-black italic text-white/70">{PERFORMANCE_DATA.comparisonEstaticos.week1.totalLeads}</p>
-                    </div>
-                    <div className="grid grid-cols-[1fr_auto] items-center gap-2">
-                      <p className="text-[8px] font-bold uppercase text-white/20 tracking-widest">CPL Médio</p>
-                      <p className="text-xs md:text-sm font-black italic">R$ {PERFORMANCE_DATA.comparisonEstaticos.week1.avgCpl.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Semana 2: Anterior */}
-                <div className="glass-card p-3 md:p-4 rounded-[1.5rem] border-white/5 space-y-3 relative overflow-hidden group flex flex-col justify-center bg-white/[0.01]">
-                  <div className="absolute top-0 right-0 p-1.5 bg-white/5 rounded-bl-[1rem] font-black text-[6px] uppercase italic text-white/40 tracking-widest">W2: Anterior</div>
-                  <h3 className="text-xs font-black italic uppercase tracking-tight text-white/50">Fase 2: Sem. Anterior (12-18/05)</h3>
-                  
-                  <div className="space-y-2">
-                    <div className="grid grid-cols-[1fr_auto] items-center border-b border-white/5 pb-1.5 gap-2">
-                      <p className="text-[8px] font-bold uppercase text-white/20 tracking-widest">Investimento</p>
-                      <p className="text-xs md:text-sm font-black italic text-white whitespace-nowrap">R$ {PERFORMANCE_DATA.comparisonEstaticos.week2.totalInvestment.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
-                    </div>
-                    <div className="grid grid-cols-[1fr_auto] items-center border-b border-white/5 pb-1.5 gap-2">
-                      <p className="text-[8px] font-bold uppercase text-white/20 tracking-widest">Leads</p>
-                      <div className="text-right">
-                        <p className="text-sm font-black italic text-white/80 leading-none">{PERFORMANCE_DATA.comparisonEstaticos.week2.totalLeads}</p>
-                        <p className="text-[6px] font-bold uppercase text-brand-cyan mt-0.5 whitespace-nowrap">
-                          +{(((PERFORMANCE_DATA.comparisonEstaticos.week2.totalLeads / PERFORMANCE_DATA.comparisonEstaticos.week1.totalLeads) - 1) * 100).toFixed(0)}% vol vs ant
-                        </p>
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-[1fr_auto] items-center gap-2">
-                      <p className="text-[8px] font-bold uppercase text-white/20 tracking-widest">CPL Médio</p>
-                      <div className="text-right">
-                        <p className="text-xs md:text-sm font-black italic text-emerald-400/90 leading-none">R$ {PERFORMANCE_DATA.comparisonEstaticos.week2.avgCpl.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
-                        <p className="text-[6px] font-bold uppercase text-emerald-400/60 mt-0.5 whitespace-nowrap">
-                          -{((1 - PERFORMANCE_DATA.comparisonEstaticos.week2.avgCpl / PERFORMANCE_DATA.comparisonEstaticos.week1.avgCpl) * 100).toFixed(1)}% cpl vs ant
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Semana 3: Atual */}
-                <div className="glass-card p-3 md:p-4 rounded-[1.5rem] border-brand-cyan/20 bg-brand-cyan/5 space-y-3 relative overflow-hidden shadow-[0_0_30px_-15px_rgba(0,242,255,0.1)] flex flex-col justify-center">
-                  <div className="absolute top-0 right-0 p-1.5 bg-brand-cyan text-brand-black font-black text-[6px] uppercase italic rounded-bl-[1rem] shadow-lg tracking-widest">W3: Atual</div>
-                  <h3 className="text-xs font-black italic uppercase tracking-tight text-brand-cyan">Fase 3: Sem. Atual (19-25/05)</h3>
-                  
-                  <div className="space-y-2">
-                    <div className="grid grid-cols-[1fr_auto] items-center border-b border-brand-cyan/10 pb-1.5 gap-2">
-                      <p className="text-[8px] font-bold uppercase text-brand-cyan/60 tracking-widest">Investimento</p>
-                      <p className="text-xs md:text-sm font-black italic text-white whitespace-nowrap">R$ {PERFORMANCE_DATA.comparisonEstaticos.week3.totalInvestment.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
-                    </div>
-                    <div className="grid grid-cols-[1fr_auto] items-center border-b border-brand-cyan/10 pb-1.5 gap-2">
-                      <p className="text-[8px] font-bold uppercase text-brand-cyan/60 tracking-widest">Leads</p>
-                      <div className="text-right">
-                        <p className="text-base md:text-lg font-black italic text-brand-cyan cyan-glow leading-none">{PERFORMANCE_DATA.comparisonEstaticos.week3.totalLeads}</p>
-                        <p className="text-[6px] font-bold uppercase text-brand-cyan/40 mt-0.5 whitespace-nowrap">
-                          +{(((PERFORMANCE_DATA.comparisonEstaticos.week3.totalLeads / PERFORMANCE_DATA.comparisonEstaticos.week2.totalLeads) - 1) * 100).toFixed(1)}% vol vs ant
-                        </p>
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-[1fr_auto] items-center gap-2">
-                      <p className="text-[8px] font-bold uppercase text-brand-cyan/60 tracking-widest">CPL Médio</p>
-                      <div className="text-right">
-                        <p className="text-xs md:text-sm font-black italic text-emerald-400 leading-none whitespace-nowrap">R$ {PERFORMANCE_DATA.comparisonEstaticos.week3.avgCpl.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
-                        <p className="text-[6px] font-bold uppercase text-emerald-400/40 mt-0.5 whitespace-nowrap">
-                          -{((1 - PERFORMANCE_DATA.comparisonEstaticos.week3.avgCpl / PERFORMANCE_DATA.comparisonEstaticos.week2.avgCpl) * 100).toFixed(1)}% cpl vs ant
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/* Seção Criativo Campeão */}
-              <div className="w-full mt-2 grid grid-cols-1 md:grid-cols-12 gap-3 items-stretch">
-                {/* Lado Esquerdo: Identificação do Criativo Campeão */}
-                <div className="md:col-span-5 flex flex-col justify-between gap-3 h-full">
-                  <div className="w-full bg-white/[0.01] border border-white/5 rounded-2xl p-4 flex flex-col justify-between gap-3 h-full">
-                    <div>
-                      <span className="text-[8px] font-black uppercase text-brand-cyan/80 tracking-[0.2em] leading-none block mb-1">Criativo Campeão</span>
-                      <p className="text-white/40 text-[7px] font-mono leading-none mb-3">Nome do anúncio e estratégia comercial</p>
-                    </div>
-
-                    {/* Célula do Anúncio Metódica com Alta Fidelidade ao Ads Manager */}
-                    <div className="bg-[#edf2f7] border border-slate-300 rounded-xl overflow-hidden shadow-2xl">
-                      {/* Header sutil da tabela */}
-                      <div className="bg-slate-200/90 px-3 py-1.5 border-b border-slate-300 flex items-center justify-between text-slate-500 font-sans font-semibold text-[6.5px] tracking-wider uppercase">
-                        <span>Nome do Anúncio</span>
-                        <span className="flex items-center gap-1">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                          Ativo
-                        </span>
-                      </div>
-                      
-                      {/* Corpo da célula - Exatamente igual à foto enviada */}
-                      <div className="px-3.5 py-4 flex flex-col justify-center bg-[#f0f4f8] text-slate-800 font-sans border-l-4 border-emerald-500">
-                        <span className="text-xs sm:text-sm font-semibold tracking-tight leading-none text-slate-800/95">
-                          ADS01 - 99,00 mensais.
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Visão de Abordagem */}
-                    <div className="bg-brand-cyan/[0.02] border border-brand-cyan/10 rounded-xl p-3">
-                      <p className="text-brand-cyan text-[7px] font-bold tracking-widest uppercase mb-1">Visão de Abordagem</p>
-                      <p className="text-white/70 text-[10px] sm:text-xs leading-relaxed font-semibold">
-                        Abordagem comercial focada na <strong className="text-white font-bold">proteção simplificada a partir de R$ 99,00 mensais</strong>, gerando o maior volume de leads qualificados com menor CPL.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Lado Direito: Métricas do Anúncio (Investimento, CPL Médio, Quantidade) */}
-                <div className="md:col-span-7 glass-card p-4 rounded-[1.5rem] border-brand-cyan/25 bg-brand-cyan/[0.02] flex flex-col justify-center gap-4">
-                  <div>
-                    <span className="px-1.5 py-0.5 bg-brand-cyan/10 text-brand-cyan text-[7px] font-black uppercase tracking-[0.2em] rounded-full border border-brand-cyan/25 inline-block leading-none shadow-sm mb-1">
-                      📊 Métricas do Anúncio
-                    </span>
-                    <p className="text-white/40 text-[7px] font-mono leading-none">Dados de performance exclusivos deste criativo</p>
-                  </div>
-
-                  {/* As 3 Métricas Solicitadas */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    {/* Investimento */}
-                    <div className="bg-white/[0.01] border border-white/5 rounded-xl p-3 text-center flex flex-col justify-center h-28">
-                      <span className="text-white/30 text-[7.5px] font-bold uppercase tracking-widest leading-none mb-2">Investimento Feito</span>
-                      <div className="flex items-baseline justify-center gap-0.5 leading-none">
-                        <span className="text-[9px] font-black text-white/50">R$</span>
-                        <span className="text-lg md:text-xl font-black italic tracking-tighter text-white">
-                          {PERFORMANCE_DATA.campaign2.championCreative.spent.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Quantidade */}
-                    <div className="bg-white/[0.01] border border-white/5 rounded-xl p-3 text-center flex flex-col justify-center h-28">
-                      <span className="text-white/30 text-[7.5px] font-bold uppercase tracking-widest leading-none mb-2">Quantidade (Leads)</span>
-                      <span className="text-2xl md:text-3xl font-black italic tracking-tighter text-brand-cyan cyan-glow leading-none">
-                        {PERFORMANCE_DATA.campaign2.championCreative.leads}
-                      </span>
-                    </div>
-
-                    {/* CPL Médio */}
-                    <div className="bg-white/[0.01] border border-white/5 rounded-xl p-3 text-center flex flex-col justify-center h-28">
-                      <span className="text-white/30 text-[7.5px] font-bold uppercase tracking-widest leading-none mb-2">CPL Médio</span>
-                      <div className="flex items-baseline justify-center gap-0.5 leading-none">
-                        <span className="text-[9px] font-black text-emerald-400">R$</span>
-                        <span className="text-lg md:text-xl font-black italic tracking-tighter text-emerald-400 leading-none">
-                          {PERFORMANCE_DATA.campaign2.championCreative.cpl.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {currentSlide === 4 && (
-            <div className="w-full max-w-5xl px-4 flex flex-col justify-center items-center gap-3">
-              <div className="flex flex-col items-center gap-1 text-center mb-1">
-                <span className="text-brand-cyan font-black italic text-lg uppercase tracking-widest leading-none">Comparativo</span>
-                <h2 className="text-xl md:text-3xl font-black italic uppercase tracking-tighter mx-auto leading-tight">Campanha de Performance Geral</h2>
-                <div className="h-0.5 w-12 bg-white/10 my-1" />
-                <p className="text-white/30 uppercase tracking-[0.2em] font-bold text-[8px] italic">Evolução de Performance Semanal e Visão Mensal Consolidada</p>
-              </div>
-
-              {/* Destaque do Acumulado (Visão Consolidada de 3 Semanas) */}
-              <div className="glass-card p-3 md:p-4 rounded-[1.5rem] border-brand-cyan/20 bg-brand-cyan/5 text-center relative overflow-hidden shadow-[0_0_35px_-20px_rgba(0,242,255,0.15)] w-full">
-                <p className="text-brand-cyan text-[8px] font-bold uppercase tracking-[0.3em] mb-1">Resultado Geral Acumulado • Visão 3 Semanas</p>
-                <div className="flex flex-col md:flex-row justify-around items-center gap-3 mt-1.5">
-                  <div>
-                    <p className="text-white/30 text-[8px] font-bold uppercase tracking-widest">Total Investido</p>
-                    <p className="text-sm md:text-base font-black italic text-white uppercase tracking-tighter">
-                      R$ {PERFORMANCE_DATA.comparisonOriginal.combined.totalInvestment.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-                    </p>
-                  </div>
-                  <div className="hidden md:block h-6 w-[1px] bg-white/10" />
-                  <div>
-                    <p className="text-brand-cyan text-[8px] font-bold uppercase tracking-widest">Total de Leads</p>
-                    <p className="text-lg font-black italic text-brand-cyan cyan-glow uppercase tracking-tighter leading-none">
-                      {PERFORMANCE_DATA.comparisonOriginal.combined.totalLeads} Leads
-                    </p>
-                  </div>
-                  <div className="hidden md:block h-6 w-[1px] bg-white/10" />
-                  <div>
-                    <p className="text-white/30 text-[8px] font-bold uppercase tracking-widest">CPL Médio Geral</p>
-                    <p className="text-sm md:text-base font-black italic text-emerald-400 uppercase tracking-tighter">
-                      R$ {PERFORMANCE_DATA.comparisonOriginal.combined.avgCpl.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Grid das 3 semanas comparativas */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 w-full items-stretch animate-fade-in">
-                {/* Semana 1: Inicial */}
-                <div className="glass-card p-3 md:p-4 rounded-[1.5rem] border-white/5 space-y-3 relative overflow-hidden group flex flex-col justify-center bg-white/[0.01]">
-                  <div className="absolute top-0 right-0 p-1.5 bg-white/5 rounded-bl-[1rem] font-black text-[6px] uppercase italic text-white/40 tracking-widest">W1: Inicial</div>
-                  <h3 className="text-xs font-black italic uppercase tracking-tight text-white/40">Fase 1: Sem. Inicial (05-11/05)</h3>
-                  
-                  <div className="space-y-2">
-                    <div className="grid grid-cols-[1fr_auto] items-center border-b border-white/5 pb-1.5 gap-2">
-                      <p className="text-[8px] font-bold uppercase text-white/20 tracking-widest">Investimento</p>
-                      <p className="text-xs md:text-sm font-black italic whitespace-nowrap">R$ {PERFORMANCE_DATA.comparisonOriginal.week1.totalInvestment.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
-                    </div>
-                    <div className="grid grid-cols-[1fr_auto] items-center border-b border-white/5 pb-1.5 gap-2">
-                      <p className="text-[8px] font-bold uppercase text-white/20 tracking-widest">Leads</p>
-                      <p className="text-sm font-black italic text-white/70">{PERFORMANCE_DATA.comparisonOriginal.week1.totalLeads}</p>
-                    </div>
-                    <div className="grid grid-cols-[1fr_auto] items-center gap-2">
-                      <p className="text-[8px] font-bold uppercase text-white/20 tracking-widest">CPL Médio</p>
-                      <p className="text-xs md:text-sm font-black italic text-white">R$ {PERFORMANCE_DATA.comparisonOriginal.week1.avgCpl.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Semana 2: Anterior */}
-                <div className="glass-card p-3 md:p-4 rounded-[1.5rem] border-white/5 space-y-3 relative overflow-hidden group flex flex-col justify-center bg-white/[0.01]">
-                  <div className="absolute top-0 right-0 p-1.5 bg-white/5 rounded-bl-[1rem] font-black text-[6px] uppercase italic text-white/40 tracking-widest">W2: Anterior</div>
-                  <h3 className="text-xs font-black italic uppercase tracking-tight text-white/50">Fase 2: Sem. Anterior (12-18/05)</h3>
-                  
-                  <div className="space-y-2">
-                    <div className="grid grid-cols-[1fr_auto] items-center border-b border-white/5 pb-1.5 gap-2">
-                      <p className="text-[8px] font-bold uppercase text-white/20 tracking-widest">Investimento</p>
-                      <p className="text-xs md:text-sm font-black italic text-white whitespace-nowrap">R$ {PERFORMANCE_DATA.comparisonOriginal.week2.totalInvestment.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
-                    </div>
-                    <div className="grid grid-cols-[1fr_auto] items-center border-b border-white/5 pb-1.5 gap-2">
-                      <p className="text-[8px] font-bold uppercase text-white/20 tracking-widest">Leads</p>
-                      <div className="text-right">
-                        <p className="text-sm font-black italic text-white/85 leading-none">{PERFORMANCE_DATA.comparisonOriginal.week2.totalLeads}</p>
-                        <p className="text-[6px] font-bold uppercase text-brand-cyan mt-0.5 whitespace-nowrap">
-                          +{(((PERFORMANCE_DATA.comparisonOriginal.week2.totalLeads / PERFORMANCE_DATA.comparisonOriginal.week1.totalLeads) - 1) * 100).toFixed(1)}% vs W1
-                        </p>
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-[1fr_auto] items-center gap-2">
-                      <p className="text-[8px] font-bold uppercase text-white/20 tracking-widest">CPL Médio</p>
-                      <div className="text-right">
-                        <p className="text-xs md:text-sm font-black italic text-emerald-400/90 leading-none">R$ {PERFORMANCE_DATA.comparisonOriginal.week2.avgCpl.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
-                        <p className="text-[6px] font-bold uppercase text-emerald-400/60 mt-0.5 whitespace-nowrap">
-                          -{((1 - PERFORMANCE_DATA.comparisonOriginal.week2.avgCpl / PERFORMANCE_DATA.comparisonOriginal.week1.avgCpl) * 100).toFixed(1)}% vs W1
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Semana 3: Atual / Última semana */}
-                <div className="glass-card p-3 md:p-4 rounded-[1.5rem] border-brand-cyan/20 bg-brand-cyan/5 space-y-3 relative overflow-hidden shadow-[0_0_30px_-15px_rgba(0,242,255,0.1)] flex flex-col justify-center">
-                  <div className="absolute top-0 right-0 p-1.5 bg-brand-cyan text-brand-black font-black text-[6px] uppercase italic rounded-bl-[1rem] shadow-lg tracking-widest">W3: Atual</div>
-                  <h3 className="text-xs font-black italic uppercase tracking-tight text-brand-cyan">Fase 3: Sem. Atual (19-25/05)</h3>
-                  
-                  <div className="space-y-2">
-                    <div className="grid grid-cols-[1fr_auto] items-center border-b border-brand-cyan/10 pb-1.5 gap-2">
-                      <p className="text-[8px] font-bold uppercase text-brand-cyan/60 tracking-widest">Investimento</p>
-                      <p className="text-xs md:text-sm font-black italic text-white whitespace-nowrap">R$ {PERFORMANCE_DATA.comparisonOriginal.week3.totalInvestment.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
-                    </div>
-                    <div className="grid grid-cols-[1fr_auto] items-center border-b border-brand-cyan/10 pb-1.5 gap-2">
-                      <p className="text-[8px] font-bold uppercase text-brand-cyan/60 tracking-widest">Leads</p>
-                      <div className="text-right">
-                        <p className="text-base md:text-lg font-black italic text-brand-cyan cyan-glow leading-none">{PERFORMANCE_DATA.comparisonOriginal.week3.totalLeads}</p>
-                        <p className="text-[6px] font-bold uppercase text-amber-500 mt-0.5 whitespace-nowrap">
-                          -{(((1 - PERFORMANCE_DATA.comparisonOriginal.week3.totalLeads / PERFORMANCE_DATA.comparisonOriginal.week2.totalLeads)) * 100).toFixed(1)}% vol vs W2
-                        </p>
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-[1fr_auto] items-center gap-2">
-                      <p className="text-[8px] font-bold uppercase text-brand-cyan/60 tracking-widest">CPL Médio</p>
-                      <div className="text-right">
-                        <p className="text-xs md:text-sm font-black italic text-emerald-400 leading-none whitespace-nowrap">R$ {PERFORMANCE_DATA.comparisonOriginal.week3.avgCpl.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
-                        <p className="text-[6px] font-bold uppercase text-emerald-400/90 mt-0.5 whitespace-nowrap font-black">
-                          -{((1 - PERFORMANCE_DATA.comparisonOriginal.week3.avgCpl / PERFORMANCE_DATA.comparisonOriginal.week2.avgCpl) * 100).toFixed(1)}% vs W2
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-
-            </div>
-          )}
-
-          {currentSlide === 5 && (
+          {false && (
             <div className="w-full max-w-5xl px-4 flex flex-col justify-center items-center gap-3">
               <div className="flex flex-col items-center gap-1.5 text-center mb-1">
                 <span className="text-brand-cyan font-black italic text-lg uppercase tracking-[0.2em] leading-none">BRAND</span>
@@ -753,7 +257,7 @@ export default function App() {
             </div>
           )}
 
-          {currentSlide === 6 && (
+          {false && (
             <div className="w-full max-w-5xl px-4 flex flex-col justify-center items-center gap-3">
               <div className="flex flex-col items-center gap-1.5 text-center mb-1">
                 <span className="text-brand-cyan font-black italic text-lg uppercase tracking-[0.2em] leading-none">VISIT</span>
@@ -877,7 +381,7 @@ export default function App() {
             </div>
           )}
 
-          {currentSlide === 7 && (
+          {false && (
             <div className="w-full max-w-5xl px-4 flex flex-col justify-center items-center gap-3">
               <div className="flex flex-col items-center gap-1.5 text-center mb-1">
                 <span className="text-brand-cyan font-black italic text-lg uppercase tracking-[0.2em] leading-none">HIRE</span>
@@ -1001,7 +505,7 @@ export default function App() {
             </div>
           )}
 
-          {currentSlide === 8 && (() => {
+          {false && (() => {
             const COMPILATION_DATA = {
               '7d': {
                 periodTitle: "Últimos 07 Dias (19/05 a 25/05)",
@@ -1180,7 +684,7 @@ export default function App() {
             );
           })()}
 
-          {currentSlide === 9 && (
+          {currentSlide === 0 && (
             <div className="text-center space-y-8 max-w-5xl">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -1203,7 +707,7 @@ export default function App() {
             </div>
           )}
 
-          {currentSlide === 10 && (
+          {currentSlide === 1 && (
             <div className="w-full max-w-5xl px-4 flex flex-col justify-center items-center gap-3 animate-fade-in">
               <div className="flex flex-col items-center gap-1.5 text-center mb-1 w-full">
                 <span className="text-brand-cyan font-black italic text-lg uppercase tracking-[0.2em] leading-none">GOOGLE ADS</span>
@@ -1320,7 +824,7 @@ export default function App() {
             </div>
           )}
 
-          {currentSlide === 11 && (
+          {currentSlide === 2 && (
             <div className="w-full max-w-5xl px-4 pt-10 md:pt-16 flex flex-col justify-center items-center gap-3 animate-fade-in">
               <div className="flex flex-col items-center gap-1.5 text-center mb-1 w-full">
                 <span className="text-brand-cyan font-black italic text-lg uppercase tracking-[0.2em] leading-none">GOOGLE ADS</span>
@@ -1442,7 +946,7 @@ export default function App() {
             </div>
           )}
 
-          {currentSlide === 12 && (() => {
+          {currentSlide === 3 && (() => {
             const campaigns = [
               {
                 name: "Institucional",
@@ -1763,7 +1267,7 @@ export default function App() {
             );
           })()}
 
-          {currentSlide === 13 && (
+          {currentSlide === 4 && (
             <div className="w-full max-w-5xl px-4 pt-4 md:pt-8 flex flex-col justify-center items-center gap-3 animate-fade-in text-white">
               {/* Header Container */}
               <div className="flex flex-col items-center gap-1.5 text-center mb-1 w-full">
@@ -1802,7 +1306,7 @@ export default function App() {
                         { name: "[AEG] [RP] - PROTEÇÃO VEICULAR | CIDADES COM SEDES", val: 9, label: "conversas", isCrm: false },
                         { name: "[AEG] [RP] - PROTEÇÃO VEICULAR TESTE CRM", val: 1, label: "conversa", isCrm: true },
                       ].map((item, idx) => (
-                        <div key={idx} className="flex justify-between items-center bg-white/[0.02] border border-white/5 rounded-xl px-3 py-1.5 hover:border-emerald-500/30 transition-all">
+                        <div key={idx} className="flex justify-between items-center bg-white/[0.02] border border-white/5 rounded-xl px-3.5 py-2 md:py-2.5 hover:border-emerald-500/30 transition-all">
                           <div className="flex items-center gap-2 min-w-0">
                             {item.isCrm && (
                               <span className="text-[6.5px] font-mono font-bold bg-amber-500/10 text-amber-500/80 border border-amber-500/15 px-1 py-0.5 rounded uppercase leading-none shrink-0">CRM</span>
@@ -1848,7 +1352,7 @@ export default function App() {
                         { name: "[AEG] [RP] - CONCORRENTES", val: 4, label: "ligações", isCrm: false },
                         { name: "[AEG] [RP] - CONCORRENTES TESTE CRM", val: 3, label: "ligações", isCrm: true },
                       ].map((item, idx) => (
-                        <div key={idx} className="flex justify-between items-center bg-white/[0.02] border border-white/5 rounded-xl px-3 py-1.5 hover:border-brand-cyan/30 transition-all">
+                        <div key={idx} className="flex justify-between items-center bg-white/[0.02] border border-white/5 rounded-xl px-3.5 py-2 md:py-2.5 hover:border-brand-cyan/30 transition-all">
                           <div className="flex items-center gap-2 min-w-0">
                             {item.isCrm && (
                               <span className="text-[6.5px] font-mono font-bold bg-amber-500/10 text-amber-500/80 border border-amber-500/15 px-1 py-0.5 rounded uppercase leading-none shrink-0">CRM</span>
@@ -1880,7 +1384,7 @@ export default function App() {
                     "Estratégia focada em oportunidades comerciais qualificadas",
                     "Presença eficiente nas pesquisas de alta intenção do Google"
                   ].map((analise, idx) => (
-                    <div key={idx} className="flex items-start gap-1.5 bg-white/[0.01] border border-white/5 rounded-xl p-2.5 hover:border-brand-cyan/15 transition-colors">
+                    <div key={idx} className="flex items-start gap-1.5 bg-white/[0.01] border border-white/5 rounded-xl p-3.5 hover:border-brand-cyan/15 transition-colors">
                       <div className="p-0.5 bg-brand-cyan/10 rounded text-brand-cyan mt-0.5 shrink-0">
                         <Target size={10} />
                       </div>
@@ -1892,7 +1396,7 @@ export default function App() {
             </div>
           )}
 
-          {currentSlide === 14 && (
+          {currentSlide === 5 && (
             <div className="w-full max-w-5xl px-4 pt-4 md:pt-6 flex flex-col justify-center items-center gap-2.5 animate-fade-in text-white">
               {/* Header Container */}
               <div className="flex flex-col items-center gap-1 text-center w-full shrink-0">
@@ -1926,9 +1430,9 @@ export default function App() {
                     </div>
 
                     {/* Grill Metric Card */}
-                    <div className="grid grid-cols-2 gap-2 mt-2">
+                    <div className="grid grid-cols-2 gap-2.5 mt-2">
                       {/* Conversões */}
-                      <div className="bg-white/[0.02] border border-white/5 rounded-xl p-2 flex flex-col justify-center">
+                      <div className="bg-white/[0.02] border border-white/5 rounded-xl p-3 md:p-3.5 flex flex-col justify-center">
                         <span className="text-[7.5px] uppercase font-bold text-white/40 tracking-wider flex items-center gap-1">
                           <Users size={8} className="text-brand-cyan" /> Conversões Totais
                         </span>
@@ -1939,7 +1443,7 @@ export default function App() {
                       </div>
 
                       {/* Investimento */}
-                      <div className="bg-white/[0.02] border border-white/5 rounded-xl p-2 flex flex-col justify-center">
+                      <div className="bg-white/[0.02] border border-white/5 rounded-xl p-3 md:p-3.5 flex flex-col justify-center">
                         <span className="text-[7.5px] uppercase font-bold text-white/40 tracking-wider flex items-center gap-1">
                           <DollarSign size={8} /> Investimento Total
                         </span>
@@ -1949,7 +1453,7 @@ export default function App() {
                       </div>
 
                       {/* Média CTR */}
-                      <div className="bg-white/[0.02] border border-white/5 rounded-xl p-2 flex flex-col justify-center">
+                      <div className="bg-white/[0.02] border border-white/5 rounded-xl p-3 md:p-3.5 flex flex-col justify-center">
                         <span className="text-[7.5px] uppercase font-bold text-white/40 tracking-wider flex items-center gap-1">
                           <BarChart3 size={8} className="text-brand-cyan" /> Média de CTR
                         </span>
@@ -1960,7 +1464,7 @@ export default function App() {
                       </div>
 
                       {/* Taxa de Conversão */}
-                      <div className="bg-white/[0.02] border border-white/5 rounded-xl p-2 flex flex-col justify-center">
+                      <div className="bg-white/[0.02] border border-white/5 rounded-xl p-3 md:p-3.5 flex flex-col justify-center">
                         <span className="text-[7.5px] uppercase font-bold text-white/40 tracking-wider flex items-center gap-1">
                           <Target size={8} className="text-brand-cyan" /> Média de Tx. Conv.
                         </span>
@@ -1975,7 +1479,7 @@ export default function App() {
                   {/* Bullet Highlights */}
                   <div className="mt-3 pt-2.5 border-t border-white/5 flex flex-col gap-1.5">
                     <span className="text-[7px] font-black uppercase text-brand-cyan tracking-wider font-mono">Destaques Estruturais da LP A</span>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                       {[
                         "Maior volume de conversões da operação",
                         "Melhor desempenho geral em campanhas principais",
@@ -2011,9 +1515,9 @@ export default function App() {
                     </div>
 
                     {/* Grill Metric Card */}
-                    <div className="grid grid-cols-2 gap-2 mt-2">
+                    <div className="grid grid-cols-2 gap-2.5 mt-2">
                       {/* Conversões */}
-                      <div className="bg-white/[0.01] border border-white/5 rounded-xl p-2 flex flex-col justify-center">
+                      <div className="bg-white/[0.01] border border-white/5 rounded-xl p-3 md:p-3.5 flex flex-col justify-center">
                         <span className="text-[7.5px] uppercase font-bold text-white/30 tracking-wider flex items-center gap-1">
                           <Users size={8} /> Conversões Totais
                         </span>
@@ -2023,7 +1527,7 @@ export default function App() {
                       </div>
 
                       {/* Investimento */}
-                      <div className="bg-white/[0.01] border border-white/5 rounded-xl p-2 flex flex-col justify-center">
+                      <div className="bg-white/[0.01] border border-white/5 rounded-xl p-3 md:p-3.5 flex flex-col justify-center">
                         <span className="text-[7.5px] uppercase font-bold text-white/30 tracking-wider flex items-center gap-1">
                           <DollarSign size={8} /> Investimento Total
                         </span>
@@ -2033,7 +1537,7 @@ export default function App() {
                       </div>
 
                       {/* Média CTR */}
-                      <div className="bg-white/[0.01] border border-white/5 rounded-xl p-2 flex flex-col justify-center">
+                      <div className="bg-white/[0.01] border border-white/5 rounded-xl p-3 md:p-3.5 flex flex-col justify-center">
                         <span className="text-[7.5px] uppercase font-bold text-white/30 tracking-wider flex items-center gap-1">
                           <BarChart3 size={8} /> Média de CTR
                         </span>
@@ -2043,7 +1547,7 @@ export default function App() {
                       </div>
 
                       {/* Taxa de Conversão */}
-                      <div className="bg-white/[0.01] border border-white/5 rounded-xl p-2 flex flex-col justify-center">
+                      <div className="bg-white/[0.01] border border-white/5 rounded-xl p-3 md:p-3.5 flex flex-col justify-center">
                         <span className="text-[7.5px] uppercase font-bold text-white/30 tracking-wider flex items-center gap-1">
                           <Target size={8} /> Média de Tx. Conv.
                         </span>
@@ -2057,7 +1561,7 @@ export default function App() {
                   {/* Bullet Highlights */}
                   <div className="mt-3 pt-2.5 border-t border-white/5 flex flex-col gap-1.5">
                     <span className="text-[7px] font-black uppercase text-white/40 tracking-wider font-mono">Destaques Estruturais da LP B</span>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                       {[
                         "Melhor desempenho em campanhas específicas",
                         "Melhor taxa de conversão em Seguro Veicular",
@@ -2090,7 +1594,7 @@ export default function App() {
                     { campaign: "PROTEÇÃO VEICULAR", winner: "LP A", desc: "LP A apresentou maior volume de leads, enquanto LP B demonstrou boa taxa de conversão.", lpColor: "text-brand-cyan border-brand-cyan/25 bg-brand-cyan/5" },
                     { campaign: "CIDADES COM SEDES", winner: "LP A", desc: "LP A apresentou melhor estabilidade operacional e melhor custo por resultado.", lpColor: "text-brand-cyan border-brand-cyan/25 bg-brand-cyan/5" }
                   ].map((item, idx) => (
-                    <div key={idx} className="bg-white/[0.01] border border-white/5 rounded-xl p-2 flex flex-col justify-between hover:border-brand-cyan/15 transition-all">
+                    <div key={idx} className="bg-white/[0.01] border border-white/5 rounded-xl p-3.5 flex flex-col justify-between hover:border-brand-cyan/15 transition-all">
                       <div>
                         <div className="flex justify-between items-center mb-1">
                           <span className="text-[7.5px] font-black uppercase text-white/50 tracking-wider font-mono leading-none">{item.campaign}</span>
@@ -2120,7 +1624,7 @@ export default function App() {
             </div>
           )}
 
-          {currentSlide === 15 && (
+          {currentSlide === 6 && (
             <div className="w-full max-w-5xl px-4 pt-4 md:pt-6 flex flex-col justify-center items-center gap-3 md:gap-4 animate-fade-in text-white font-sans">
               {/* Header Container */}
               <div className="flex flex-col items-center gap-1 text-center w-full shrink-0">
@@ -2276,7 +1780,7 @@ export default function App() {
             </div>
           )}
 
-          {currentSlide === 16 && (
+          {currentSlide === 7 && (
             <div className="w-full max-w-5xl px-4 pt-4 md:pt-6 flex flex-col justify-center items-center gap-3 md:gap-4 animate-fade-in text-white">
               {/* Header Container */}
               <div className="flex flex-col items-center gap-1 text-center w-full shrink-0">
