@@ -96,7 +96,7 @@ export default function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [compilePeriod, setCompilePeriod] = useState<'7d' | 'month'>('7d');
   const [activeGoogleCampaign, setActiveGoogleCampaign] = useState(0);
-  const totalSlides = 8;
+  const totalSlides = 5;
 
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % totalSlides);
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
@@ -711,103 +711,107 @@ export default function App() {
             <div className="w-full max-w-5xl px-4 flex flex-col justify-center items-center gap-3 animate-fade-in">
               <div className="flex flex-col items-center gap-1.5 text-center mb-1 w-full">
                 <span className="text-brand-cyan font-black italic text-lg uppercase tracking-[0.2em] leading-none">GOOGLE ADS</span>
-                <h2 className="text-xl md:text-3xl font-black italic uppercase tracking-tighter mx-auto leading-none mt-1">Performance Google Ads - Maio Imbatível</h2>
+                <h2 className="text-xl md:text-3xl font-black italic uppercase tracking-tighter mx-auto leading-none mt-1">Performance Google Ads - Visão Geral</h2>
                 <div className="h-0.5 w-12 bg-white/10 my-1" />
-                <p className="text-white/30 uppercase tracking-[0.2em] font-bold text-[8px] italic">Resultado Consolidado das Campanhas de Tráfego Pago</p>
+                <p className="text-white/30 uppercase tracking-[0.2em] font-bold text-[8px] italic">Resultado Consolidado da Conta • 01/06/2026 a 07/06/2026</p>
               </div>
 
               {/* Destaque Central de Investimento e Custo */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 w-full">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 w-full items-start">
                 {/* Investimento */}
                 <div className="glass-card p-4 rounded-2xl border-brand-cyan/20 bg-brand-cyan/5 flex flex-col justify-between items-center text-center relative overflow-hidden shadow-[0_0_30px_-15px_rgba(0,242,255,0.15)] h-32">
-                  <div className="absolute top-0 right-0 p-1.5 bg-brand-cyan text-brand-black font-black text-[6px] uppercase italic tracking-widest rounded-bl-lg">Budget</div>
+                  <div className="absolute top-0 right-0 p-1.5 bg-brand-cyan text-brand-black font-black text-[6px] uppercase italic tracking-widest rounded-bl-lg">Custo Total</div>
                   <span className="text-white/40 text-[8px] font-bold uppercase tracking-[0.2em] mt-1">Investimento Google Ads</span>
                   <p className="text-2xl md:text-3xl font-black italic tracking-tighter text-brand-cyan cyan-glow leading-none my-auto">
-                    R$ 23.474,21
+                    R$ 5.810,50
                   </p>
-                  <span className="text-white/30 text-[7px] font-mono">Foco em Performance e Escala</span>
+                  <span className="text-white/30 text-[7px] font-mono">Últimos 07 Dias de Veiculação</span>
                 </div>
 
-                {/* Leads Gerados (Destaque!) */}
-                <div className="glass-card p-4 rounded-2xl border-brand-cyan/35 bg-brand-cyan/10 flex flex-col justify-between items-center text-center relative overflow-hidden shadow-[0_0_40px_-15px_rgba(0,242,255,0.25)] h-32">
-                  <div className="absolute top-0 right-0 p-1.5 bg-brand-cyan text-brand-black font-black text-[6px] uppercase italic tracking-widest rounded-bl-lg">Hot Leads</div>
-                  <span className="text-brand-cyan text-[8px] font-bold uppercase tracking-[0.2em] mt-1">Leads Gerados</span>
-                  <div className="flex items-center gap-2 my-auto">
-                    <Users className="text-brand-cyan animate-pulse" size={18} />
-                    <p className="text-3xl md:text-4xl font-black italic tracking-tighter text-white leading-none">
-                      415
-                    </p>
+                {/* Conversões Principais e Interações Diretas */}
+                <div className="flex flex-col gap-3 w-full">
+                  {/* Conversões Principais */}
+                  <div className="glass-card p-4 rounded-2xl border-brand-cyan/35 bg-brand-cyan/10 flex flex-col justify-between items-center text-center relative overflow-hidden shadow-[0_0_40px_-15px_rgba(0,242,255,0.25)] h-32">
+                    <div className="absolute top-0 right-0 p-1.5 bg-brand-cyan text-brand-black font-black text-[6px] uppercase italic tracking-widest rounded-bl-lg">Hot Leads</div>
+                    <span className="text-brand-cyan text-[8px] font-bold uppercase tracking-[0.2em] mt-1">Conversões Principais</span>
+                    <div className="flex items-center gap-2 my-auto">
+                      <Users className="text-brand-cyan animate-pulse" size={18} />
+                      <p className="text-3xl md:text-4xl font-black italic tracking-tighter text-white leading-none">
+                        54
+                      </p>
+                    </div>
+                    <span className="text-brand-cyan/70 text-[7px] font-mono font-bold tracking-wider uppercase">Formulários de Cotação Ativos</span>
                   </div>
-                  <span className="text-brand-cyan/70 text-[7px] font-mono font-bold tracking-wider uppercase">Cadastros Nativos do Google</span>
+
+                  {/* Ligações + WhatsApp Cards Side-by-Side */}
+                  <div className="grid grid-cols-2 gap-3">
+                    {/* Calls from Ads */}
+                    <div className="glass-card p-3 rounded-xl border-white/5 bg-white/[0.01] flex flex-col justify-center items-center text-center">
+                      <span className="text-white/40 text-[7.5px] font-bold uppercase tracking-wider">Ligações</span>
+                      <p className="text-lg md:text-xl font-black italic tracking-tight text-white mt-1 font-mono">
+                        64
+                      </p>
+                    </div>
+
+                    {/* Whats started */}
+                    <div className="glass-card p-3 rounded-xl border-white/5 bg-white/[0.01] flex flex-col justify-center items-center text-center">
+                      <span className="text-white/40 text-[7.5px] font-bold uppercase tracking-wider">WhatsApp</span>
+                      <p className="text-lg md:text-xl font-black italic tracking-tight text-white mt-1 font-mono">
+                        40
+                      </p>
+                    </div>
+                  </div>
                 </div>
 
-                {/* Conversões Totais (Destaque!) */}
+                {/* Custo/Conv. (Destaque!) */}
                 <div className="glass-card p-4 rounded-2xl border-brand-cyan/35 bg-brand-cyan/10 flex flex-col justify-between items-center text-center relative overflow-hidden shadow-[0_0_40px_-15px_rgba(0,242,255,0.25)] h-32">
-                  <div className="absolute top-0 right-0 p-1.5 bg-brand-cyan text-brand-black font-black text-[6px] uppercase italic tracking-widest rounded-bl-lg">Ações</div>
-                  <span className="text-brand-cyan text-[8px] font-bold uppercase tracking-[0.2em] mt-1">Conversões Totais</span>
+                  <span className="text-brand-cyan text-[8px] font-bold uppercase tracking-[0.2em] mt-1">Custo por Conversão</span>
                   <div className="flex items-center gap-2 my-auto">
                     <Target className="text-brand-cyan" size={18} />
-                    <p className="text-3xl md:text-4xl font-black italic tracking-tighter text-white leading-none">
-                      510
+                    <p className="text-2xl md:text-3xl font-black italic tracking-tighter text-white leading-none">
+                      R$ 107,63
                     </p>
                   </div>
-                  <span className="text-brand-cyan/70 text-[7px] font-mono font-bold tracking-wider uppercase">Ações Rastradas Totais</span>
+                  <span className="text-brand-cyan/70 text-[7px] font-mono font-bold tracking-wider uppercase">Média Geral Computada</span>
                 </div>
               </div>
 
               {/* Grid Secundária de Métricas de Apoio */}
-              <div className="grid grid-cols-2 md:grid-cols-6 gap-3 w-full">
-                {/* Taxa de Conversão (Destaque!) */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full">
+                {/* Taxa de Conversão */}
                 <div className="glass-card p-3 rounded-xl border-brand-cyan/25 bg-white/[0.01] flex flex-col justify-center items-center text-center">
                   <span className="text-brand-cyan text-[7.5px] font-bold uppercase tracking-wider">Tx. Conversão</span>
                   <p className="text-lg md:text-xl font-black italic tracking-tight text-brand-cyan cyan-glow mt-1 font-mono">
-                    12,41%
+                    5,35%
                   </p>
-                  <span className="text-white/20 text-[6px] font-bold uppercase mt-0.5">Alta Conversão</span>
-                </div>
-
-                {/* Custo/Conv. */}
-                <div className="glass-card p-3 rounded-xl border-white/5 bg-white/[0.01] flex flex-col justify-center items-center text-center">
-                  <span className="text-white/40 text-[7.5px] font-bold uppercase tracking-wider">Custo/Conv.</span>
-                  <p className="text-lg md:text-xl font-black italic tracking-tight text-white mt-1 font-mono">
-                    R$ 46,03
-                  </p>
+                  <span className="text-white/20 text-[6px] font-bold uppercase mt-0.5">Formulários / Cliques</span>
                 </div>
 
                 {/* Cliques Gerados */}
                 <div className="glass-card p-3 rounded-xl border-white/5 bg-white/[0.01] flex flex-col justify-center items-center text-center">
                   <span className="text-white/40 text-[7.5px] font-bold uppercase tracking-wider">Cliques Gerados</span>
                   <p className="text-lg md:text-xl font-black italic tracking-tight text-white mt-1">
-                    4.108
+                    1.008
                   </p>
-                  <span className="text-white/20 text-[6px] font-bold uppercase mt-0.5">Cliques Qualificados</span>
+                  <span className="text-white/20 text-[6px] font-bold uppercase mt-0.5">Tráfego Qualificado</span>
                 </div>
 
                 {/* Impressões */}
                 <div className="glass-card p-3 rounded-xl border-white/5 bg-white/[0.01] flex flex-col justify-center items-center text-center">
                   <span className="text-white/40 text-[7.5px] font-bold uppercase tracking-wider">Impressões</span>
                   <p className="text-lg md:text-xl font-black italic tracking-tight text-white mt-1">
-                    40.348
+                    11.346
                   </p>
-                  <span className="text-white/20 text-[6px] font-bold uppercase mt-0.5">Alcance Amplo</span>
+                  <span className="text-white/20 text-[6px] font-bold uppercase mt-0.5">Exposições Google</span>
                 </div>
 
                 {/* CTR Médio */}
                 <div className="glass-card p-3 rounded-xl border-white/5 bg-white/[0.01] flex flex-col justify-center items-center text-center">
                   <span className="text-white/40 text-[7.5px] font-bold uppercase tracking-wider">CTR Médio</span>
                   <p className="text-lg md:text-xl font-black italic tracking-tight text-white mt-1 font-mono">
-                    10,18%
+                    8,88%
                   </p>
-                  <span className="text-emerald-400/85 text-[6px] font-bold uppercase mt-0.5 font-bold">Acima do Padrão</span>
-                </div>
-
-                {/* % Impressão Topo */}
-                <div className="glass-card p-3 rounded-xl border-white/5 bg-white/[0.01] flex flex-col justify-center items-center text-center">
-                  <span className="text-white/40 text-[7.5px] font-bold uppercase tracking-wider">Posição Topo</span>
-                  <p className="text-lg md:text-xl font-black italic tracking-tight text-white mt-1 font-mono">
-                    80,65%
-                  </p>
-                  <span className="text-white/25 text-[6px] font-bold uppercase mt-0.5">Top of Page</span>
+                  <span className="text-emerald-400/85 text-[6px] font-bold uppercase mt-0.5 font-bold">Excelente CTR</span>
                 </div>
               </div>
 
@@ -815,10 +819,10 @@ export default function App() {
               <div className="w-full bg-white/[0.02] border border-white/5 rounded-2xl p-4 text-left shadow-lg">
                 <div className="flex items-center gap-2 mb-1">
                   <div className="w-1.5 h-1.5 rounded-full bg-brand-cyan animate-pulse" />
-                  <span className="text-[8px] font-black uppercase text-brand-cyan tracking-[0.2em]">Observação Estratégica</span>
+                  <span className="text-[8px] font-black uppercase text-brand-cyan tracking-[0.2em]">Observações & Alertas Rápidos</span>
                 </div>
                 <p className="text-white/60 text-[10px] md:text-xs leading-relaxed font-semibold">
-                  Os leads apresentados consideram apenas os cadastros nativos realizados dentro do Google. Já o total de conversões inclui todas as ações rastreadas nas campanhas, como preenchimento de formulário, ligações, cliques no WhatsApp.
+                  O CTR médio de <strong>8,88%</strong> está excelente, refletindo alta intenção das pesquisas. Entretanto, as interações diretas (ligações e WhatsApp) somam <strong>104 contatos</strong> que não estão configurados como conversão principal. Integrar e rastrear corretamente esse tráfego é prioridade máxima.
                 </p>
               </div>
             </div>
@@ -951,136 +955,136 @@ export default function App() {
               {
                 name: "Institucional",
                 fullName: "[AEG] [RP] - INSTITUCIONAL",
-                spent: "R$ 2.752,97",
-                cliques: "1.137",
-                impressions: "8.158",
-                ctr: "13,94%",
-                leads: "177",
+                spent: "R$ 937,62",
+                cliques: "350",
+                impressions: "2.660",
+                ctr: "13,16%",
+                leads: "23,00",
                 whatsapp: "0",
-                ligacoes: "44",
-                conversionRate: "17,19%",
-                cpl: "R$ 14,09",
-                topPage: "81,30%",
-                strategy: "Campanha com maior volume de leads e excelente custo por conversão, fortalecendo a presença institucional e a geração de demanda qualificada.",
-                tag: "Maior Volume & Eficiência",
+                ligacoes: "16,17",
+                conversionRate: "6,57%",
+                cpl: "R$ 40,77",
+                topPage: "85,00%",
+                strategy: "Melhor desempenho geral do período, apresentando o menor custo por conversão da conta.",
+                tag: "Melhor Volume & Eficiência",
                 isTest: false
               },
               {
                 name: "Concorrentes",
                 fullName: "[AEG] [RP] - CONCORRENTES",
-                spent: "R$ 4.313,91",
-                cliques: "544",
-                impressions: "9.133",
-                ctr: "5,96%",
-                leads: "95",
-                whatsapp: "21",
-                ligacoes: "4",
-                conversionRate: "21,42%",
-                cpl: "R$ 37,03",
+                spent: "R$ 1.229,11",
+                cliques: "111",
+                impressions: "2.525",
+                ctr: "4,40%",
+                leads: "20",
+                whatsapp: "2",
+                ligacoes: "1,00",
+                conversionRate: "17,57%",
+                cpl: "R$ 63,03",
                 topPage: "82,54%",
-                strategy: "Campanha com alta taxa de conversão focada em usuários pesquisando empresas concorrentes no Google.",
+                strategy: "Excelente taxa de conversão direta. Embora o CPC seja elevado devido a leilões de concorrência, o retorno em leads é representativo.",
                 tag: "Alta Taxa de Conversão",
                 isTest: false
               },
               {
                 name: "Proteção Veicular",
-                fullName: "[AEG] [RP] - PROTEÇÃO VEICULAR",
-                spent: "R$ 5.164,83",
-                cliques: "630",
-                impressions: "6.037",
-                ctr: "10,44%",
-                leads: "62",
-                whatsapp: "33",
-                ligacoes: "17",
-                conversionRate: "15,71%",
-                cpl: "R$ 52,18",
+                fullName: "[AEG] [RP] - PROTEÇÃO VEÍCULAR",
+                spent: "R$ 896,72",
+                cliques: "84",
+                impressions: "960",
+                ctr: "8,75%",
+                leads: "7",
+                whatsapp: "1",
+                ligacoes: "6,83",
+                conversionRate: "7,72%",
+                cpl: "R$ 138,30",
                 topPage: "83,19%",
-                strategy: "Campanha principal voltada para captação de usuários com alta intenção de contratação de proteção veicular.",
+                strategy: "Custo por conversão elevado. Campanha principal que necessita de otimizações de criativos e negativizações constantes.",
                 tag: "Campanha Principal / Escala",
                 isTest: false
               },
               {
-                name: "Cidade com Sede",
-                fullName: "[AEG] [RP] - PROTEÇÃO VEICULAR | CIDADES COM SEDES",
-                spent: "R$ 1.158,41",
-                cliques: "408",
-                impressions: "2.172",
-                ctr: "18,78%",
-                leads: "16",
+                name: "Cidades com Sedes",
+                fullName: "[AEG] [RP] - PROTEÇÃO VEÍCULAR | CIDADES COM SEDES",
+                spent: "R$ 216,91",
+                cliques: "85",
+                impressions: "506",
+                ctr: "16,80%",
+                leads: "1,00",
                 whatsapp: "9",
-                ligacoes: "19",
-                conversionRate: "7,60%",
-                cpl: "R$ 48,96",
+                ligacoes: "6,00",
+                conversionRate: "1,18%",
+                cpl: "R$ 216,91",
                 topPage: "85,57%",
-                strategy: "Campanha regional com maior CTR da conta, fortalecendo a presença local nas cidades com operação.",
-                tag: "Maior CTR / Regional",
+                strategy: "CTR excelente de 16,80% e CPC baixo, mas baixa taxa de conversão direta. As 9 conversas iniciadas no WhatsApp não estão sendo rastreadas como conversão principal.",
+                tag: "Máxima Atração / Baixo Rastreio",
                 isTest: false
               },
               {
                 name: "Seguro Veicular",
                 fullName: "[AEG] [RP] - SEGURO VEICULAR",
-                spent: "R$ 2.823,22",
-                cliques: "137",
-                impressions: "2.106",
-                ctr: "6,51%",
-                leads: "33",
-                whatsapp: "0",
+                spent: "R$ 702,78",
+                cliques: "32",
+                impressions: "519",
+                ctr: "6,17%",
+                leads: "4,00",
+                whatsapp: "1",
                 ligacoes: "0",
-                conversionRate: "24,09%",
-                cpl: "R$ 85,35",
+                conversionRate: "12,50%",
+                cpl: "R$ 175,70",
                 topPage: "85,85%",
-                strategy: "Campanha com maior taxa de conversão da conta, focada em usuários buscando alternativas relacionadas a seguro automotivo.",
-                tag: "Maior Tx. Conversão da Conta",
+                strategy: "Maior custo por conversão da conta. CPC muito elevado (R$ 21,96) encarece o resultado final. Exige atenção imediata.",
+                tag: "Maior CPC / Atenção",
                 isTest: false
               },
               {
-                name: "Institucional - Teste",
+                name: "Inst. - Teste CRM",
                 fullName: "[AEG] [RP] - INSTITUCIONAL TESTE CRM",
-                spent: "R$ 1.200,55",
-                cliques: "617",
-                impressions: "4.852",
-                ctr: "12,72%",
-                leads: "24",
-                whatsapp: "0",
-                ligacoes: "21",
-                conversionRate: "4,13%",
-                cpl: "R$ 47,08",
+                spent: "R$ 349,01",
+                cliques: "167",
+                impressions: "1.678",
+                ctr: "9,95%",
+                leads: "0",
+                whatsapp: "8",
+                ligacoes: "9,50",
+                conversionRate: "0,00%",
+                cpl: "R$ 0,00",
                 topPage: "72,91%",
-                strategy: "Campanha utilizada para testes e validação do envio e recebimento de leads via CRM.",
+                strategy: "ALERTA — Investiu R$ 349,01 sem nenhuma conversão principal ativa. Registrou 8 conversas no WhatsApp e ligações; checar fluxo do CRM.",
                 tag: "Validação Tática de CRM",
                 isTest: true
               },
               {
-                name: "Proteção V. - Teste",
-                fullName: "[AEG] [RP] - PROTEÇÃO VEICULAR TESTE CRM",
-                spent: "R$ 4.083,18",
-                cliques: "457",
-                impressions: "4.501",
-                ctr: "10,15%",
-                leads: "6",
-                whatsapp: "1",
-                ligacoes: "16",
-                conversionRate: "1,62%",
-                cpl: "R$ 540,63",
+                name: "Prot. V. - Teste CRM",
+                fullName: "[AEG] [RP] - PROTEÇÃO VEÍCULAR TESTE CRM",
+                spent: "R$ 1.072,36",
+                cliques: "137",
+                impressions: "1.525",
+                ctr: "8,98%",
+                leads: "0",
+                whatsapp: "13",
+                ligacoes: "7,50",
+                conversionRate: "0,00%",
+                cpl: "R$ 0,00",
                 topPage: "78,37%",
-                strategy: "Estrutura de validação e integração de eventos e conversões através do CRM.",
+                strategy: "ALERTA CRÍTICO — R$ 1.072,36 investidos sem conversão ativa rastreada. Alto tráfego desperdiçado sem tagueamento unificado de CRM.",
                 tag: "Validação Técnica de CRM",
                 isTest: true
               },
               {
-                name: "Concorrentes - Teste",
+                name: "Conc. - Teste CRM",
                 fullName: "[AEG] [RP] - CONCORRENTES TESTE CRM",
-                spent: "R$ 2.617,15",
-                cliques: "178",
-                impressions: "3.389",
-                ctr: "5,25%",
-                leads: "2",
-                whatsapp: "15",
-                ligacoes: "3",
-                conversionRate: "1,12%",
-                cpl: "R$ 808,57",
+                spent: "R$ 405,99",
+                cliques: "42",
+                impressions: "973",
+                ctr: "4,32%",
+                leads: "0",
+                whatsapp: "6",
+                ligacoes: "0",
+                conversionRate: "0,00%",
+                cpl: "R$ 0,00",
                 topPage: "75,42%",
-                strategy: "Campanha destinada à validação técnica de rastreamento e recebimento de leads via CRM.",
+                strategy: "ALERTA — R$ 405,99 consumidos com 0 conversões diretas contabilizadas. Necessário unificar o fluxo de disparo de eventos.",
                 tag: "Validação Técnica de CRM",
                 isTest: true
               }
@@ -1092,7 +1096,7 @@ export default function App() {
               <div className="w-full max-w-5xl px-4 pt-2 md:pt-4 flex flex-col justify-center items-center gap-2.5 animate-fade-in">
                 <div className="flex flex-col items-center gap-1 text-center w-full">
                   <span className="text-brand-cyan font-black italic text-sm md:text-base uppercase tracking-[0.2em] leading-none">GOOGLE ADS</span>
-                  <h2 className="text-xl md:text-2xl font-black italic uppercase tracking-tighter mx-auto leading-none mt-1">Performance Individual das Campanhas — Maio</h2>
+                  <h2 className="text-xl md:text-2xl font-black italic uppercase tracking-tighter mx-auto leading-none mt-1">Performance Individual das Campanhas — Junho</h2>
                   <div className="h-0.5 w-12 bg-white/10 my-1" />
                   <p className="text-white/30 uppercase tracking-[0.2em] font-bold text-[8px] italic leading-none">Visão Analítica Completa por Objetivo Tático Operacional</p>
                 </div>
@@ -1274,7 +1278,7 @@ export default function App() {
                 <span className="text-brand-cyan font-black italic text-lg uppercase tracking-[0.2em] leading-none">GOOGLE ADS</span>
                 <h2 className="text-xl md:text-3xl font-black italic uppercase tracking-tighter mx-auto leading-none mt-1">Interações Geradas — Ligações e WhatsApp</h2>
                 <div className="h-0.5 w-12 bg-white/10 my-1" />
-                <p className="text-white/30 uppercase tracking-[0.2em] font-bold text-[8px] italic leading-none">Resultado Consolidado dos Canais Diretos de Conversão — Maio</p>
+                <p className="text-white/30 uppercase tracking-[0.2em] font-bold text-[8px] italic leading-none">Resultado Consolidado dos Canais Diretos de Conversão — Junho</p>
               </div>
 
               {/* Grid 2 Columns for WhatsApp and Calls */}
@@ -1294,19 +1298,21 @@ export default function App() {
                       </div>
                       <div className="text-right">
                         <span className="text-white/30 text-[7px] font-bold uppercase block tracking-wider leading-none">TOTAL</span>
-                        <span className="text-2xl font-black text-emerald-400 font-mono italic leading-none block mt-0.5">79</span>
+                        <span className="text-2xl font-black text-emerald-400 font-mono italic leading-none block mt-0.5">~40</span>
                       </div>
                     </div>
 
                     <div className="flex flex-col gap-2 flex-1 justify-center">
                       {[
-                        { name: "[AEG] [RP] - PROTEÇÃO VEICULAR", val: 33, label: "conversas", isCrm: false },
-                        { name: "[AEG] [RP] - CONCORRENTES", val: 21, label: "conversas", isCrm: false },
-                        { name: "[AEG] [RP] - CONCORRENTES TESTE CRM", val: 15, label: "conversas", isCrm: true },
-                        { name: "[AEG] [RP] - PROTEÇÃO VEICULAR | CIDADES COM SEDES", val: 9, label: "conversas", isCrm: false },
-                        { name: "[AEG] [RP] - PROTEÇÃO VEICULAR TESTE CRM", val: 1, label: "conversa", isCrm: true },
+                        { name: "[AEG] [RP] - PROTEÇÃO VEÍCULAR TESTE CRM", val: "13", label: "conversas", isCrm: true },
+                        { name: "[AEG] [RP] - PROTEÇÃO VEÍCULAR | CIDADES COM SEDES", val: "9", label: "conversas", isCrm: false },
+                        { name: "[AEG] [RP] - INSTITUCIONAL TESTE CRM", val: "8", label: "conversas", isCrm: true },
+                        { name: "[AEG] [RP] - CONCORRENTES TESTE CRM", val: "6", label: "conversas", isCrm: true },
+                        { name: "[AEG] [RP] - CONCORRENTES", val: "2", label: "conversas", isCrm: false },
+                        { name: "[AEG] [RP] - PROTEÇÃO VEÍCULAR", val: "1", label: "conversa", isCrm: false },
+                        { name: "[AEG] [RP] - SEGURO VEICULAR", val: "1", label: "conversa", isCrm: false },
                       ].map((item, idx) => (
-                        <div key={idx} className="flex justify-between items-center bg-white/[0.02] border border-white/5 rounded-xl px-3.5 py-2 md:py-2.5 hover:border-emerald-500/30 transition-all">
+                        <div key={idx} className="flex justify-between items-center bg-white/[0.02] border border-white/5 rounded-xl px-3.5 py-1.5 md:py-2 hover:border-emerald-500/30 transition-all">
                           <div className="flex items-center gap-2 min-w-0">
                             {item.isCrm && (
                               <span className="text-[6.5px] font-mono font-bold bg-amber-500/10 text-amber-500/80 border border-amber-500/15 px-1 py-0.5 rounded uppercase leading-none shrink-0">CRM</span>
@@ -1338,21 +1344,20 @@ export default function App() {
                       </div>
                       <div className="text-right">
                         <span className="text-white/30 text-[7px] font-bold uppercase block tracking-wider leading-none">TOTAL</span>
-                        <span className="text-2xl font-black text-brand-cyan font-mono italic leading-none block mt-0.5">124</span>
+                        <span className="text-2xl font-black text-brand-cyan font-mono italic leading-none block mt-0.5 font-bold">64</span>
                       </div>
                     </div>
 
-                    <div className="flex flex-col gap-1.5 flex-1 justify-center">
+                    <div className="flex flex-col gap-2 flex-1 justify-center">
                       {[
-                        { name: "[AEG] [RP] - INSTITUCIONAL", val: 44, label: "ligações", isCrm: false },
-                        { name: "[AEG] [RP] - INSTITUCIONAL TESTE CRM", val: 21, label: "ligações", isCrm: true },
-                        { name: "[AEG] [RP] - PROTEÇÃO VEICULAR | CIDADES COM SEDES", val: 19, label: "ligações", isCrm: false },
-                        { name: "[AEG] [RP] - PROTEÇÃO VEICULAR", val: 17, label: "ligações", isCrm: false },
-                        { name: "[AEG] [RP] - PROTEÇÃO VEICULAR TESTE CRM", val: 16, label: "ligações", isCrm: true },
-                        { name: "[AEG] [RP] - CONCORRENTES", val: 4, label: "ligações", isCrm: false },
-                        { name: "[AEG] [RP] - CONCORRENTES TESTE CRM", val: 3, label: "ligações", isCrm: true },
+                        { name: "[AEG] [RP] - INSTITUCIONAL", val: "17", label: "ligações", isCrm: false },
+                        { name: "[AEG] [RP] - INSTITUCIONAL TESTE CRM", val: "9,50", label: "ligações", isCrm: true },
+                        { name: "[AEG] [RP] - PROTEÇÃO VEÍCULAR TESTE CRM", val: "7,50", label: "ligações", isCrm: true },
+                        { name: "[AEG] [RP] - PROTEÇÃO VEÍCULAR", val: "6,83", label: "ligações", isCrm: false },
+                        { name: "[AEG] [RP] - PROTEÇÃO VEÍCULAR | CIDADES COM SEDES", val: "6,00", label: "ligações", isCrm: false },
+                        { name: "[AEG] [RP] - CONCORRENTES", val: "1,00", label: "ligação", isCrm: false },
                       ].map((item, idx) => (
-                        <div key={idx} className="flex justify-between items-center bg-white/[0.02] border border-white/5 rounded-xl px-3.5 py-2 md:py-2.5 hover:border-brand-cyan/30 transition-all">
+                        <div key={idx} className="flex justify-between items-center bg-white/[0.02] border border-white/5 rounded-xl px-3.5 py-1.5 md:py-2 hover:border-brand-cyan/30 transition-all">
                           <div className="flex items-center gap-2 min-w-0">
                             {item.isCrm && (
                               <span className="text-[6.5px] font-mono font-bold bg-amber-500/10 text-amber-500/80 border border-amber-500/15 px-1 py-0.5 rounded uppercase leading-none shrink-0">CRM</span>
@@ -1396,233 +1401,6 @@ export default function App() {
             </div>
           )}
 
-          {currentSlide === 5 && (
-            <div className="w-full max-w-5xl px-4 pt-4 md:pt-6 flex flex-col justify-center items-center gap-2.5 animate-fade-in text-white">
-              {/* Header Container */}
-              <div className="flex flex-col items-center gap-1 text-center w-full shrink-0">
-                <span className="text-brand-cyan font-black italic text-sm md:text-base uppercase tracking-[0.2em] leading-none">TESTE MULTIVARIÁVEL</span>
-                <h2 className="text-xl md:text-2xl font-black italic uppercase tracking-tighter mx-auto leading-none mt-1">Comparativo Geral de Performance — LP A vs LP B</h2>
-                <div className="h-0.5 w-12 bg-white/10 my-1" />
-                <p className="text-white/40 uppercase tracking-[0.2em] font-bold text-[8px] italic leading-none mb-1.5">Análise de Performance e Taxas de Aproveitamento — Maio</p>
-                
-                {/* Visão Geral do Teste */}
-                <p className="max-w-3xl text-white/50 text-[9px] md:text-xs leading-relaxed font-semibold text-center mb-1">
-                  As Landing Pages A e B foram utilizadas em campanhas estratégicas da Rede de Pesquisa com o objetivo de identificar qual estrutura apresentaria melhor desempenho em conversões, custo por resultado e aproveitamento do tráfego qualificado.
-                </p>
-              </div>
-
-              {/* Lado a Lado: LP A vs LP B */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 w-full">
-                {/* CARD LP A (Velo/Winner) */}
-                <div className="glass-card p-3 rounded-2xl border-brand-cyan/40 bg-brand-cyan/[0.02] flex flex-col justify-between relative overflow-hidden shadow-[0_0_30px_-15px_rgba(0,242,255,0.25)]">
-                  {/* Winner flag */}
-                  <span className="absolute top-0 right-0 px-2.5 py-1 bg-brand-cyan text-brand-black font-black text-[7.5px] uppercase italic tracking-[0.1em] rounded-bl-xl shadow-lg flex items-center gap-1">
-                    <Target size={8} /> LP VENCEDORA • ESCALA
-                  </span>
-
-                  <div>
-                    <div className="flex items-center gap-1.5 mb-2">
-                      <div className="w-1.5 h-1.5 rounded-full bg-brand-cyan animate-pulse" />
-                      <div>
-                        <h3 className="text-sm font-black italic uppercase text-white leading-none">Landing Page A</h3>
-                        <p className="text-[7px] font-mono text-brand-cyan font-bold tracking-wider uppercase mt-0.5">ESTRUTURA DE ALTA CONVERSÃO</p>
-                      </div>
-                    </div>
-
-                    {/* Grill Metric Card */}
-                    <div className="grid grid-cols-2 gap-2.5 mt-2">
-                      {/* Conversões */}
-                      <div className="bg-white/[0.02] border border-white/5 rounded-xl p-3 md:p-3.5 flex flex-col justify-center">
-                        <span className="text-[7.5px] uppercase font-bold text-white/40 tracking-wider flex items-center gap-1">
-                          <Users size={8} className="text-brand-cyan" /> Conversões Totais
-                        </span>
-                        <div className="flex items-baseline gap-1 mt-1">
-                          <p className="text-lg md:text-xl font-black italic tracking-tight text-white leading-none">367</p>
-                          <span className="text-[6.5px] font-mono text-emerald-400 font-bold bg-emerald-500/10 px-1 py-0.2 rounded leading-none shrink-0 border border-emerald-500/15">+233.6%</span>
-                        </div>
-                      </div>
-
-                      {/* Investimento */}
-                      <div className="bg-white/[0.02] border border-white/5 rounded-xl p-3 md:p-3.5 flex flex-col justify-center">
-                        <span className="text-[7.5px] uppercase font-bold text-white/40 tracking-wider flex items-center gap-1">
-                          <DollarSign size={8} /> Investimento Total
-                        </span>
-                        <p className="text-base md:text-lg font-black italic text-white/90 leading-none mt-1 font-mono">
-                          R$ 11.446,95
-                        </p>
-                      </div>
-
-                      {/* Média CTR */}
-                      <div className="bg-white/[0.02] border border-white/5 rounded-xl p-3 md:p-3.5 flex flex-col justify-center">
-                        <span className="text-[7.5px] uppercase font-bold text-white/40 tracking-wider flex items-center gap-1">
-                          <BarChart3 size={8} className="text-brand-cyan" /> Média de CTR
-                        </span>
-                        <div className="flex items-baseline gap-1 mt-1">
-                          <p className="text-base md:text-lg font-black italic tracking-tight text-white leading-none font-mono">11,66%</p>
-                          <span className="text-[6.5px] font-mono text-emerald-400 font-bold bg-emerald-500/10 px-1 py-0.2 rounded leading-none shrink-0 border border-emerald-500/15">+11.3%</span>
-                        </div>
-                      </div>
-
-                      {/* Taxa de Conversão */}
-                      <div className="bg-white/[0.02] border border-white/5 rounded-xl p-3 md:p-3.5 flex flex-col justify-center">
-                        <span className="text-[7.5px] uppercase font-bold text-white/40 tracking-wider flex items-center gap-1">
-                          <Target size={8} className="text-brand-cyan" /> Média de Tx. Conv.
-                        </span>
-                        <div className="flex items-baseline gap-1 mt-1">
-                          <p className="text-base md:text-lg font-black italic tracking-tight text-white leading-none font-mono">20,88%</p>
-                          <span className="text-[6.5px] font-mono text-emerald-400 font-bold bg-emerald-500/10 px-1 py-0.2 rounded leading-none shrink-0 border border-emerald-500/15">+18.6%</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Bullet Highlights */}
-                  <div className="mt-3 pt-2.5 border-t border-white/5 flex flex-col gap-1.5">
-                    <span className="text-[7px] font-black uppercase text-brand-cyan tracking-wider font-mono">Destaques Estruturais da LP A</span>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                      {[
-                        "Maior volume de conversões da operação",
-                        "Melhor desempenho geral em campanhas principais",
-                        "Melhor estabilidade operacional",
-                        "Melhor aproveitamento em institucionais e de concorrência",
-                        "Melhor custo por conversão em grande parte das campanhas"
-                      ].map((bullet, idx) => (
-                        <div key={idx} className="flex items-start gap-1">
-                          <div className="p-0.5 bg-brand-cyan/10 rounded text-brand-cyan mt-0.5 shrink-0">
-                            <ShieldCheck size={7.5} />
-                          </div>
-                          <span className="text-white/80 text-[8.5px] leading-tight font-semibold">{bullet}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* CARD LP B (Efficient niche / Specifics) */}
-                <div className="glass-card p-3 rounded-2xl border-white/5 bg-white/[0.005] flex flex-col justify-between relative overflow-hidden">
-                  {/* Label flag */}
-                  <span className="absolute top-0 right-0 px-2.5 py-1 bg-white/15 text-white/60 font-black text-[7.5px] uppercase italic tracking-[0.1em] rounded-bl-xl border-bl border-white/5">
-                    ESTRUTURA B • NICHO
-                  </span>
-
-                  <div>
-                    <div className="flex items-center gap-1.5 mb-2">
-                      <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
-                      <div>
-                        <h3 className="text-sm font-black italic uppercase text-white/50 leading-none">Landing Page B</h3>
-                        <p className="text-[7px] font-mono text-white/30 font-bold tracking-wider uppercase mt-0.5">POTENCIAL REGIONAL / SEGMENTADOS</p>
-                      </div>
-                    </div>
-
-                    {/* Grill Metric Card */}
-                    <div className="grid grid-cols-2 gap-2.5 mt-2">
-                      {/* Conversões */}
-                      <div className="bg-white/[0.01] border border-white/5 rounded-xl p-3 md:p-3.5 flex flex-col justify-center">
-                        <span className="text-[7.5px] uppercase font-bold text-white/30 tracking-wider flex items-center gap-1">
-                          <Users size={8} /> Conversões Totais
-                        </span>
-                        <p className="text-lg md:text-xl font-black italic tracking-tight text-white/70 leading-none mt-1">
-                          110
-                        </p>
-                      </div>
-
-                      {/* Investimento */}
-                      <div className="bg-white/[0.01] border border-white/5 rounded-xl p-3 md:p-3.5 flex flex-col justify-center">
-                        <span className="text-[7.5px] uppercase font-bold text-white/30 tracking-wider flex items-center gap-1">
-                          <DollarSign size={8} /> Investimento Total
-                        </span>
-                        <p className="text-base md:text-lg font-black italic text-white/50 leading-none mt-1 font-mono">
-                          R$ 5.104,98
-                        </p>
-                      </div>
-
-                      {/* Média CTR */}
-                      <div className="bg-white/[0.01] border border-white/5 rounded-xl p-3 md:p-3.5 flex flex-col justify-center">
-                        <span className="text-[7.5px] uppercase font-bold text-white/30 tracking-wider flex items-center gap-1">
-                          <BarChart3 size={8} /> Média de CTR
-                        </span>
-                        <p className="text-base md:text-lg font-black italic text-white/70 leading-none mt-1 font-mono">
-                          10,47%
-                        </p>
-                      </div>
-
-                      {/* Taxa de Conversão */}
-                      <div className="bg-white/[0.01] border border-white/5 rounded-xl p-3 md:p-3.5 flex flex-col justify-center">
-                        <span className="text-[7.5px] uppercase font-bold text-white/30 tracking-wider flex items-center gap-1">
-                          <Target size={8} /> Média de Tx. Conv.
-                        </span>
-                        <p className="text-base md:text-lg font-black italic text-white/70 leading-none mt-1 font-mono">
-                          17,60%
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Bullet Highlights */}
-                  <div className="mt-3 pt-2.5 border-t border-white/5 flex flex-col gap-1.5">
-                    <span className="text-[7px] font-black uppercase text-white/40 tracking-wider font-mono">Destaques Estruturais da LP B</span>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                      {[
-                        "Melhor desempenho em campanhas específicas",
-                        "Melhor taxa de conversão em Seguro Veicular",
-                        "Estrutura com grande potencial de otimização",
-                        "Melhor aproveitamento em cenários segmentados"
-                      ].map((bullet, idx) => (
-                        <div key={idx} className="flex items-start gap-1">
-                          <div className="p-0.5 bg-white/5 rounded text-white/40 mt-0.5 shrink-0">
-                            <ShieldCheck size={7.5} />
-                          </div>
-                          <span className="text-white/60 text-[8.5px] leading-tight font-semibold">{bullet}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Destaque por Campanha */}
-              <div className="w-full shrink-0">
-                <div className="flex items-center gap-2 mb-1.5">
-                  <span className="text-[8.5px] font-black uppercase text-brand-cyan tracking-[0.15em] font-mono leading-none">Destaques por Objetivo Estratégico e Campanhas</span>
-                  <div className="h-px bg-white/5 flex-1" />
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-5 gap-2">
-                  {[
-                    { campaign: "INSTITUCIONAL", winner: "LP A", desc: "LP A apresentou maior volume de conversões e menor custo por resultado.", lpColor: "text-brand-cyan border-brand-cyan/25 bg-brand-cyan/5" },
-                    { campaign: "CONCORRENTES", winner: "LP A", desc: "LP A apresentou melhor eficiência operacional e maior escala de conversões.", lpColor: "text-brand-cyan border-brand-cyan/25 bg-brand-cyan/5" },
-                    { campaign: "SEGURO VEICULAR", winner: "LP B", desc: "LP B apresentou melhor taxa de conversão e menor custo por conversão.", lpColor: "text-emerald-400 border-emerald-400/25 bg-emerald-500/5" },
-                    { campaign: "PROTEÇÃO VEICULAR", winner: "LP A", desc: "LP A apresentou maior volume de leads, enquanto LP B demonstrou boa taxa de conversão.", lpColor: "text-brand-cyan border-brand-cyan/25 bg-brand-cyan/5" },
-                    { campaign: "CIDADES COM SEDES", winner: "LP A", desc: "LP A apresentou melhor estabilidade operacional e melhor custo por resultado.", lpColor: "text-brand-cyan border-brand-cyan/25 bg-brand-cyan/5" }
-                  ].map((item, idx) => (
-                    <div key={idx} className="bg-white/[0.01] border border-white/5 rounded-xl p-3.5 flex flex-col justify-between hover:border-brand-cyan/15 transition-all">
-                      <div>
-                        <div className="flex justify-between items-center mb-1">
-                          <span className="text-[7.5px] font-black uppercase text-white/50 tracking-wider font-mono leading-none">{item.campaign}</span>
-                          <span className={cn("text-[6.5px] font-mono font-bold px-1 py-0.5 rounded uppercase leading-none border", item.lpColor)}>
-                            Venceu: {item.winner}
-                          </span>
-                        </div>
-                        <p className="text-white/80 text-[8.5px] leading-tight font-semibold mt-0.5">
-                          {item.desc}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Conclusão Estratégica alert banner */}
-              <div className="w-full bg-white/[0.02] border border-white/5 rounded-2xl p-3.5 text-left shadow-lg shrink-0 mt-0.5">
-                <div className="flex items-center gap-2 mb-1">
-                  <div className="w-1.5 h-1.5 rounded-full bg-brand-cyan animate-pulse" />
-                  <span className="text-[8px] font-black uppercase text-brand-cyan tracking-[0.15em] font-mono">Conclusão Estratégica do Teste LP A vs LP B</span>
-                </div>
-                <p className="text-white/70 text-[9.5px] md:text-xs leading-relaxed font-semibold">
-                  Os testes permitiram validar diferentes comportamentos entre as Landing Pages. A LP A demonstrou melhor eficiência geral em escala, estabilidade e geração de oportunidades, enquanto a LP B apresentou potencial competitivo em campanhas específicas focadas em taxa de conversão e segmentações mais refinadas.
-                </p>
-              </div>
-            </div>
-          )}
 
           {currentSlide === 6 && (
             <div className="w-full max-w-5xl px-4 pt-4 md:pt-6 flex flex-col justify-center items-center gap-3 md:gap-4 animate-fade-in text-white font-sans">
