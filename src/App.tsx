@@ -1215,9 +1215,9 @@ export default function App() {
                 },
                 s2: {
                   spent: "R$ 450,30",
-                  leads: "0",
-                  conversionRate: "0,00%",
-                  cpl: "—",
+                  leads: "1",
+                  conversionRate: "3,45%",
+                  cpl: "R$ 275,24",
                   cliques: "29",
                   impressions: "701",
                   ctr: "4,14%",
@@ -1246,9 +1246,9 @@ export default function App() {
                 },
                 s2: {
                   spent: "R$ 380,10",
-                  leads: "0",
-                  conversionRate: "0,00%",
-                  cpl: "—",
+                  leads: "2",
+                  conversionRate: "1,71%",
+                  cpl: "R$ 78,32",
                   cliques: "117",
                   impressions: "1.094",
                   ctr: "10,69%",
@@ -1277,9 +1277,9 @@ export default function App() {
                 },
                 s2: {
                   spent: "R$ 1.200,43",
-                  leads: "0",
-                  conversionRate: "0,00%",
-                  cpl: "—",
+                  leads: "1",
+                  conversionRate: "1,33%",
+                  cpl: "R$ 506,11",
                   cliques: "75",
                   impressions: "690",
                   ctr: "10,87%",
@@ -1567,11 +1567,11 @@ export default function App() {
                       </div>
                       <div className="flex gap-3 text-right">
                         <div>
-                          <span className="text-white/30 text-[6px] font-bold uppercase block leading-none">W1</span>
+                          <span className="text-white/30 text-[6px] font-bold uppercase block leading-none">semana 1</span>
                           <span className="text-sm font-black text-white font-mono italic leading-none block mt-0.5">49</span>
                         </div>
                         <div className="border-l border-white/10 pl-2">
-                          <span className="text-emerald-400 text-[6px] font-bold uppercase block leading-none">W2</span>
+                          <span className="text-emerald-400 text-[6px] font-bold uppercase block leading-none">semana 2</span>
                           <span className="text-sm font-black text-emerald-400 font-mono italic leading-none block mt-0.5">31</span>
                         </div>
                       </div>
@@ -1641,11 +1641,11 @@ export default function App() {
                       </div>
                       <div className="flex gap-3 text-right">
                         <div>
-                          <span className="text-white/30 text-[6px] font-bold uppercase block leading-none">W1</span>
+                          <span className="text-white/30 text-[6px] font-bold uppercase block leading-none">semana 1</span>
                           <span className="text-sm font-black text-white font-mono italic leading-none block mt-0.5">48</span>
                         </div>
                         <div className="border-l border-white/10 pl-2">
-                          <span className="text-brand-cyan text-[6px] font-bold uppercase block leading-none">W2</span>
+                          <span className="text-brand-cyan text-[6px] font-bold uppercase block leading-none">semana 2</span>
                           <span className="text-sm font-black text-brand-cyan cyan-glow font-mono italic leading-none block mt-0.5">25</span>
                         </div>
                       </div>
